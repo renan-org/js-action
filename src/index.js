@@ -2,8 +2,8 @@ const core = require('@actions/core');
 const github = require('@actions/github');
 
 try {
-
-    const nameToGreet = core.getInput('user-name');
+    // Check environment variable first, then fall back to input
+    const nameToGreet = process.env.USER_NAME || core.getInput('user-name');
     console.log(`Hello ${nameToGreet}!`);
     core.setOutput("greeting", `Hello ${nameToGreet}!`);
 
@@ -15,6 +15,5 @@ try {
     console.log(`The event payload: ${payload}`);
 
 } catch (error) {
-
     core.setFailed(error.message);
 }
