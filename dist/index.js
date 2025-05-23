@@ -31831,8 +31831,8 @@ const core = __nccwpck_require__(7484);
 const github = __nccwpck_require__(3228);
 
 try {
-
-    const nameToGreet = core.getInput('user-name');
+    // Check environment variable first, then fall back to input
+    const nameToGreet = process.env.USER_NAME || core.getInput('user-name');
     console.log(`Hello ${nameToGreet}!`);
     core.setOutput("greeting", `Hello ${nameToGreet}!`);
 
@@ -31844,7 +31844,6 @@ try {
     console.log(`The event payload: ${payload}`);
 
 } catch (error) {
-
     core.setFailed(error.message);
 }
 
